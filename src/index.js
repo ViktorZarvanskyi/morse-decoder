@@ -39,6 +39,29 @@ const MORSE_TABLE = {
 
 function decode(expr) {
     // write your solution here
+    let result = '';
+    let subExpr = '';
+
+    const keyTable = {
+        '00': "",
+        '10': ".",
+        '11': "-",
+        '**': "*",
+    }
+
+    for (let i = 0; i < expr.length; i = i + 10) {
+        let subSymbol = ''
+        subExpr = expr.substring(i, i + 10);
+        for (let j = 0; j < subExpr.length; j = j + 2) {
+            subSymbol = subSymbol + keyTable[subExpr.substring(j, j + 2)];
+        }
+        if (subSymbol !== "*****") {
+            result = result + MORSE_TABLE[subSymbol];
+        } else {
+            result = result + " ";
+        }
+    }
+return result;
 }
 
 module.exports = {
